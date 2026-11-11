@@ -1,0 +1,1422 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-09T20:36:34Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 4707058403,
+      "lat": 11.7144282,
+      "lon": 79.7689069,
+      "tags": {
+        "addr:postcode": "607003",
+        "addr:street": "Sankara naidu street",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name:en": "Surendra hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4707097989,
+      "lat": 11.759971,
+      "lon": 79.754743,
+      "tags": {
+        "amenity": "school",
+        "name:en": "Krishnasamy memorial matric higher sec.school",
+        "opening_hours": "Mo-Sa 07:05-06:30"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5224224264,
+      "lat": 11.7670702,
+      "lon": 79.7443918,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:housenumber": "21",
+        "addr:postcode": "607002",
+        "addr:street": "Friends Nagar, 2nd Street",
+        "amenity": "hospital",
+        "check_date": "2026-05-28",
+        "email": "info@neocarehospitals.com",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "mobile": "+919791552311",
+        "name": "Neocare Maternity and Kids Hospital",
+        "name:ta": "\u0ba8\u0bbf\u0baf\u0bcb\u0b95\u0bc7\u0bb0\u0bcd \u0bae\u0b95\u0baa\u0bcd\u0baa\u0bc7\u0bb1\u0bc1 \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b95\u0bc1\u0bb4\u0ba8\u0bcd\u0ba4\u0bc8\u0b95\u0bb3\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "+914142291100",
+        "website": "https://neocarehospitals.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5225883774,
+      "lat": 11.7521078,
+      "lon": 79.7611452,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Manjakuppam",
+        "amenity": "college",
+        "name": "Immaculate College for Women",
+        "website": "https://fihmlourdeans.org/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5225888321,
+      "lat": 11.7517735,
+      "lon": 79.7608276,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:city": "Cuddalore",
+        "addr:district": "Cuddalore",
+        "addr:full": "Near School, Sorakkalpet, Dharga Sahib Street",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "addr:street": "Dharkan Sahib Street",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "gynaecology",
+        "name": "New Life Hospital",
+        "name:ta": "\u0ba8\u0bbf\u0baf\u0bc2 \u0bb2\u0bc8\u0b83\u0baa\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "04142 221 567",
+        "source": "OpenGovernmentData",
+        "website": "drrkarthigayini.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227602894,
+      "lat": 11.7577422,
+      "lon": 79.7610782,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:city": "Cuddalore",
+        "addr:district": "Cuddalore",
+        "addr:full": "34 B, Rajambal Nagar, Opp Head Post Office, Allpettai, Manjakuppam",
+        "addr:housenumber": "34 B",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "addr:street": "Allpettai",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "A.R.R.Hospital",
+        "name:ta": "\u0b8f. \u0b86\u0bb0\u0bcd. \u0b86\u0bb0\u0bcd. \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "04142 231 108",
+        "source": "OpenGovernmentData",
+        "website": "drarunprasathcardio.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227740069,
+      "lat": 11.7559599,
+      "lon": 79.7616156,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Abiraami Hospital, 24-ALC Campus",
+        "name:ta": "\u0b85\u0baa\u0bbf\u0bb0\u0bbe\u0bae\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227743832,
+      "lat": 11.7560109,
+      "lon": 79.7612183,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Abiraami Hospital",
+        "name:ta": "\u0b85\u0baa\u0bbf\u0bb0\u0bbe\u0bae\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227840333,
+      "lat": 11.7534346,
+      "lon": 79.7612573,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:housenumber": "87",
+        "addr:postcode": "607001",
+        "addr:street": "Bharathi Road",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "phone": "04142 231 147",
+        "website": "https://houseofbala.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227849019,
+      "lat": 11.7529978,
+      "lon": 79.7613485,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Manjakuppam",
+        "amenity": "school",
+        "check_date": "2024-04-06",
+        "name": "Sacred Heart Technical Institute",
+        "phone": "082205 66564"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227855986,
+      "lat": 11.752663,
+      "lon": 79.7622702,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Manjakuppam",
+        "amenity": "school",
+        "name": "Sacred Heart Convent School"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227877671,
+      "lat": 11.7532242,
+      "lon": 79.7631137,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:unit": "Sorakalpattu",
+        "amenity": "school",
+        "name": "Municipal Higher Secondary School",
+        "website": "https://cuddalore.nic.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227902126,
+      "lat": 11.7597158,
+      "lon": 79.7651459,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:housenumber": "11",
+        "addr:postcode": "607001",
+        "addr:street": "Bharadhidasan street",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "The Zusaanli Acupuncture and Ayurveda Hospital",
+        "name:ta": "\u0ba4\u0bbf \u0b9a\u0bc1\u0b9a\u0bbe\u0ba9\u0bcd\u0bb2\u0bbf \u0b85\u0b95\u0bcd\u0b95\u0bc1\u0baa\u0b9e\u0bcd\u0b9a\u0bb0\u0bcd \u0b86\u0baf\u0bc1\u0bb0\u0bcd\u0bb5\u0bc7\u0ba4\u0bbf\u0b95\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "093676 22256"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227927823,
+      "lat": 11.7615618,
+      "lon": 79.7642665,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:street": "Nethaji Rd, Allpettai",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Surya Hospital",
+        "name:ta": "\u0b9a\u0bc2\u0bb0\u0bcd\u0baf\u0bbe \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "04142 233 985"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5227929030,
+      "lat": 11.7619769,
+      "lon": 79.7640451,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:city": "Cuddalore",
+        "addr:district": "Cuddalore",
+        "addr:full": "Pillaiyar Koil, Cuddalore-1, Nethaji Road, Manjakuppam",
+        "addr:housenumber": "78",
+        "addr:postcode": "607101",
+        "addr:state": "Tamil Nadu",
+        "addr:street": "Nethaji Rd, North Venugopalapuram, Allpettai",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Sujatha Hospital",
+        "name:ta": "\u0b9a\u0bc1\u0b9c\u0bbe\u0ba4\u0bbe \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "04142 230 422",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5228331850,
+      "lat": 11.7722756,
+      "lon": 79.7593194,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:housenumber": "47",
+        "addr:postcode": "607001",
+        "addr:street": "Gundusalai Road, Pondy Bye-pass",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Saravana Hospital",
+        "name:ta": "\u0b9a\u0bb0\u0bb5\u0ba3\u0bbe \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "phone": "04142 231 662",
+        "website": "https://saravanahospital.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6914927146,
+      "lat": 11.7501695,
+      "lon": 79.7601494,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "45/2, Valli Vilas, Hospital, 45/2, Bharathy Road",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Valli Vilas Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6927559650,
+      "lat": 11.7199308,
+      "lon": 79.7694708,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:district": "Cuddalore",
+        "addr:full": "78, Old Police Line Street, Cuddalore Old Town",
+        "addr:postcode": "607003",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Alagananda Hospital",
+        "name:ta": "\u0b85\u0bb4\u0b95\u0ba9\u0ba8\u0bcd\u0ba4\u0bbe \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6932142092,
+      "lat": 11.7559788,
+      "lon": 79.7613363,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "# 25, Alc Campus",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "S.R. Hospital and E.N.T. Research Foundation",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6935217377,
+      "lat": 11.7610987,
+      "lon": 79.7541587,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "No.42-43,Sekar Nagar,Semmandalam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Maruthi Gastro Care Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6935272545,
+      "lat": 11.7557149,
+      "lon": 79.761463,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "# 30 -31, Alc Campus",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Arcot Hospital",
+        "name:ta": "\u0b86\u0bb0\u0bcd\u0b95\u0bbe\u0b9f\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6936817053,
+      "lat": 11.7618511,
+      "lon": 79.7616957,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "17, Bashyam Reddy St,Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Kannan Hospital, Cuddalore",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6937055897,
+      "lat": 11.7559244,
+      "lon": 79.7617192,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "# 24, Alc Campus",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "multi speciality",
+        "name": "Abiraami Hospital",
+        "name:ta": "\u0b85\u0baa\u0bbf\u0bb0\u0bbe\u0bae\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7262949138,
+      "lat": 11.7612866,
+      "lon": 79.7642423,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Andal Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7265222568,
+      "lat": 11.75458,
+      "lon": 79.760294,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:district": "Cuddalore",
+        "addr:full": "St. Marys School, No.2, Leppolier Street, Sorakkalpattu, Cuddalore",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "JVR Maternity Home",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7265222573,
+      "lat": 11.7459634,
+      "lon": 79.7448805,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:district": "Cuddalore",
+        "addr:full": "Register Office, Cuddalore, Sarswathi Nagar, Cuddalore",
+        "addr:postcode": "607002",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Sri Annai Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7265222585,
+      "lat": 11.75595,
+      "lon": 79.7615981,
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:district": "Cuddalore",
+        "addr:full": "Manjakuppam, Cuddalore",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Arcot Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396671,
+      "lat": 11.759948,
+      "lon": 79.752602,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Semmandalam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Kapila Hospital",
+        "name:ta": "\u0b95\u0baa\u0bbf\u0bb2\u0bbe \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396674,
+      "lat": 11.7609921,
+      "lon": 79.7641783,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Sri Ragavendera Eye Hospital",
+        "name:ta": "\u0bb8\u0bcd\u0bb0\u0bc0 \u0bb0\u0bbe\u0b95\u0bb5\u0bc7\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0\u0bbe \u0b95\u0ba3\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396679,
+      "lat": 11.7648349,
+      "lon": 79.764176,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Veludaiyaan Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396680,
+      "lat": 11.7479061,
+      "lon": 79.7502482,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Muthaiya Nagar, Thirupapuliyur",
+        "addr:postcode": "607002",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Jayakodi Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396682,
+      "lat": 11.7607715,
+      "lon": 79.7641528,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Subi Dental Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396683,
+      "lat": 11.753695,
+      "lon": 79.76033,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Sorakalpattu",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Vasantham Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396685,
+      "lat": 11.76027,
+      "lon": 79.752718,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Semmandalam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Deepam Hospital",
+        "name:ta": "\u0ba4\u0bc0\u0baa\u0bae\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396687,
+      "lat": 11.7466873,
+      "lon": 79.7507784,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Thirupapuliyur, Kesava Nagar",
+        "addr:postcode": "607002",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Devaki Hospital",
+        "name:ta": "\u0ba4\u0bc7\u0bb5\u0b95\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396689,
+      "lat": 11.7593031,
+      "lon": 79.7638536,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Neo Life Hearing Aid Centre",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396692,
+      "lat": 11.757349,
+      "lon": 79.7598777,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Hospital Road, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Sri Dhavamani Siddha Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396693,
+      "lat": 11.7617458,
+      "lon": 79.7622612,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Govindasamy Nagar",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Lakshmi Hospital",
+        "name:ta": "\u0bb2\u0b95\u0bcd\u0bb7\u0bcd\u0bae\u0bbf \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396695,
+      "lat": 11.750637,
+      "lon": 79.760603,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Valli Vilas Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396701,
+      "lat": 11.7598356,
+      "lon": 79.7647551,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "The Zusaanli Acupuncture and Ayurveda Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396709,
+      "lat": 11.7496981,
+      "lon": 79.7461239,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Thirupapuliyur",
+        "addr:postcode": "607002",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "R.R Speciality Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396718,
+      "lat": 11.7609511,
+      "lon": 79.7638694,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Venugopalapuram, Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Dr. R.K. Baskaran Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396720,
+      "lat": 11.7585866,
+      "lon": 79.7636821,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Rajambal Nagar, Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Kovan's Chest and Sleep Care Centre",
+        "name:ta": "\u0b95\u0bcb\u0bb5\u0ba9\u0bcd \u0bae\u0bbe\u0bb0\u0bcd\u0baa\u0bcd\u0baa\u0bc1 \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0ba4\u0bc2\u0b95\u0bcd\u0b95 \u0b9a\u0bbf\u0b95\u0bbf\u0b9a\u0bcd\u0b9a\u0bc8 \u0bae\u0bc8\u0baf\u0bae\u0bcd",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396721,
+      "lat": 11.7467423,
+      "lon": 79.7539971,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Muthaiya Nagar, Thirupapuliyur",
+        "addr:postcode": "607002",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Maternity Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396723,
+      "lat": 11.7617557,
+      "lon": 79.7619691,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Govindasamy Nagar",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Modern Eye Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396728,
+      "lat": 11.7561853,
+      "lon": 79.7617619,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Jayalakshmi Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396735,
+      "lat": 11.748029,
+      "lon": 79.763311,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Dr. P. Ram Mohan Hospital",
+        "name:ta": "\u0b9f\u0bbe\u0b95\u0bcd\u0b9f\u0bb0\u0bcd \u0bb0\u0bbe\u0bae\u0bcd \u0bae\u0bcb\u0b95\u0ba9\u0bcd \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7825396739,
+      "lat": 11.7592559,
+      "lon": 79.7640816,
+      "tags": {
+        "addr:district": "Cuddalore",
+        "addr:full": "Allpettai, Manjakuppam",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "JKR Piles Fistula Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9392768314,
+      "lat": 11.7425547,
+      "lon": 79.759964,
+      "tags": {
+        "addr:housenumber": "9",
+        "addr:street": "Imperial Road",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Surendra Multi-speciality Hospital",
+        "phone": "04142236999"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10711385909,
+      "lat": 11.7175722,
+      "lon": 79.7739774,
+      "tags": {
+        "amenity": "school",
+        "name": "csi st.david matriculation school"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11799300861,
+      "lat": 11.7254432,
+      "lon": 79.7678305,
+      "tags": {
+        "amenity": "school",
+        "check_date": "2024-04-07",
+        "name": "Kamatchi Shanmugam Matriculation Higher Secondary School"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11799300868,
+      "lat": 11.7372028,
+      "lon": 79.7618036,
+      "tags": {
+        "amenity": "hospital",
+        "check_date": "2024-09-20",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "name": "Surendra Multi Speciality Hospital",
+        "source": "survey"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13021968518,
+      "lat": 11.741969,
+      "lon": 79.7585492,
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:district": "Cuddalore",
+        "addr:postcode": "607002",
+        "addr:street": "RNS Center",
+        "amenity": "community_centre",
+        "club": "computer",
+        "community_centre": "club_home",
+        "contact:instagram": "cuddalore_glug",
+        "name": "Cuddalore GNU Linux Users Group",
+        "opening_hours": "su 10:00-14:00",
+        "operator": "Encourage students to use FOSS tools",
+        "operator:type": "public",
+        "website": "https://cuddaloreglug.wordpress.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189153220,
+      "center": {
+        "lat": 11.7512228,
+        "lon": 79.7701378
+      },
+      "nodes": [
+        1998093130,
+        1998093128,
+        1998093173,
+        4043590673,
+        1998093170,
+        1998093192,
+        1998093195,
+        7645799253,
+        1998093130
+      ],
+      "tags": {
+        "addr:postcode": "607001",
+        "amenity": "school",
+        "email": "schoolinfo@ckschool.in",
+        "name": "CK School of Practical Knowledge Matriculation Higher Secondary School",
+        "phone": "+91 84899 00911",
+        "school:gender": "mixed",
+        "website": "https://www.ckschool.in/index.html"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189154731,
+      "center": {
+        "lat": 11.7574846,
+        "lon": 79.7616353
+      },
+      "nodes": [
+        1998113408,
+        1998113421,
+        1998113412,
+        1998113375,
+        1998113373,
+        1998113387,
+        1998113408
+      ],
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:full": "No. 6 (Old No. 17-A) Hospital Road",
+        "addr:housenumber": "10",
+        "addr:postcode": "607001",
+        "addr:street": "Hospital Road,",
+        "addr:unit": "Manjakuppam",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "name": "Krishna hospital",
+        "phone": "04142 231 714"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189154733,
+      "center": {
+        "lat": 11.7599778,
+        "lon": 79.7547784
+      },
+      "nodes": [
+        1998113399,
+        5224264686,
+        5224264685,
+        5224264687,
+        1998113411,
+        1998113404,
+        1998113422,
+        1998113399
+      ],
+      "tags": {
+        "addr:street": "Cuddalore - Chittoor Road",
+        "amenity": "school",
+        "check_date": "2026-10-27",
+        "name": "Krishnasamy Memorial Matric Higher Sec. School",
+        "website": "https://www.krishnasamyschoolcud.in/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189154735,
+      "center": {
+        "lat": 11.7565497,
+        "lon": 79.7592227
+      },
+      "nodes": [
+        1998113415,
+        1998113430,
+        7265221758,
+        1998113386,
+        2684817741,
+        1998113428,
+        2684817742,
+        1998113425,
+        1998113443,
+        1998113381,
+        1998113427,
+        1998113403,
+        1998113405,
+        1998113369,
+        1998113437,
+        1998113415
+      ],
+      "tags": {
+        "addr:block": "Cuddalore Mpty",
+        "addr:city": "Cuddalore",
+        "addr:district": "Cuddalore",
+        "addr:full": "Manjakuppam, Cuddalore, Hospital Road",
+        "addr:postcode": "607001",
+        "addr:state": "Tamil Nadu",
+        "addr:street": "Cuddalore - Nellikuppam - Panruti - Thiruvamur - Madapattu - Thirukovilur",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "name": "Government Hospital, Cuddalore",
+        "name:ta": "\u0b85\u0bb0\u0b9a\u0bc1 \u0bae\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0ba9\u0bc8",
+        "operator": "Cuddalore Municipality",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189156329,
+      "center": {
+        "lat": 11.765715,
+        "lon": 79.7587561
+      },
+      "nodes": [
+        1998144152,
+        1998144118,
+        4464161083,
+        1998144170,
+        1998144223,
+        4043591369,
+        1998144207,
+        1998144094,
+        1998144099,
+        1998144219,
+        1998144135,
+        1998144121,
+        1998144152
+      ],
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "amenity": "school",
+        "email": "academic@arlm.in",
+        "name": "A.R.L.M. Matriculation School",
+        "phone": "+91 4142 221 983",
+        "website": "http://arlm.ac.in/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 189156330,
+      "center": {
+        "lat": 11.7548394,
+        "lon": 79.7589468
+      },
+      "nodes": [
+        1998144119,
+        2684817739,
+        1998144132,
+        1998144203,
+        1998144209,
+        1998144137,
+        1998144123,
+        1998144148,
+        1998144189,
+        1998144186,
+        1998144188,
+        10168770999,
+        10168771000,
+        1998144097,
+        1998144214,
+        1998144126,
+        1998144115,
+        1998113428,
+        2684817741,
+        1998144133,
+        1998144119
+      ],
+      "tags": {
+        "addr:postcode": "607001",
+        "amenity": "school",
+        "name": "St. Mary's Matriculation School"
+      }
+    },
+    {
+      "type": "way",
+      "id": 250300965,
+      "center": {
+        "lat": 11.7528923,
+        "lon": 79.7493439
+      },
+      "nodes": [
+        2567858883,
+        2567858884,
+        2567858885,
+        2567858886,
+        2567858887,
+        2569265336,
+        2567858888,
+        2567858889,
+        2567858890,
+        2567858891,
+        2567858892,
+        2567858893,
+        2567858894,
+        2567858895,
+        2569272931,
+        2569272932,
+        2569272933,
+        2567858898,
+        2567858899,
+        2567858900,
+        2567858883
+      ],
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607002",
+        "addr:street": "Cumming Pet road",
+        "amenity": "school",
+        "area": "yes",
+        "name": "St. Joseph's Higher Secondary School campus"
+      }
+    },
+    {
+      "type": "way",
+      "id": 255503268,
+      "center": {
+        "lat": 11.7558747,
+        "lon": 79.7506682
+      },
+      "nodes": [
+        2611857204,
+        2611857205,
+        2611857206,
+        2611857207,
+        2611857208,
+        2611857209,
+        2611857210,
+        2611857204
+      ],
+      "tags": {
+        "amenity": "school",
+        "email": "aristopublicschool@apsfoundation.in",
+        "name": "Aristo Public School",
+        "phone": "+91 4142 236 888",
+        "website": "https://apsfoundation.in/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 258048189,
+      "center": {
+        "lat": 11.7465733,
+        "lon": 79.7644569
+      },
+      "nodes": [
+        2634756033,
+        2634756034,
+        2634756035,
+        2634756036,
+        2634756033
+      ],
+      "tags": {
+        "addr:city": "Puduppalayam",
+        "addr:postcode": "607001",
+        "addr:street": "Rettai pilliyar koil street (RP Koil Street)",
+        "amenity": "school",
+        "name": "Minicipal Primary School",
+        "operator": "Cuddalore Municipality"
+      }
+    },
+    {
+      "type": "way",
+      "id": 258079422,
+      "center": {
+        "lat": 11.7138578,
+        "lon": 79.7671207
+      },
+      "nodes": [
+        2634913490,
+        5323405839,
+        2634913491,
+        2634913492,
+        2634913493,
+        2634913490
+      ],
+      "tags": {
+        "amenity": "community_centre",
+        "building": "yes",
+        "check_date": "2024-04-07",
+        "name": "Narayana Seesha Mahal",
+        "source": "survey"
+      }
+    },
+    {
+      "type": "way",
+      "id": 304476158,
+      "center": {
+        "lat": 11.7434938,
+        "lon": 79.7819167
+      },
+      "nodes": [
+        3090170468,
+        4045722774,
+        3090170469,
+        3090170470,
+        3090170471,
+        3090170472,
+        3090170473,
+        3090170474,
+        3090170475,
+        3090170476,
+        3090170477,
+        3090170478,
+        3090170479,
+        3090170480,
+        3090170481,
+        3090170482,
+        4045722760,
+        3090170483,
+        3090170484,
+        3090170485,
+        3090170468
+      ],
+      "tags": {
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 360846852,
+      "center": {
+        "lat": 11.7445667,
+        "lon": 79.7489123
+      },
+      "nodes": [
+        3654043993,
+        3654043994,
+        3654043990,
+        3654043991,
+        3654043989,
+        3654043992,
+        3654043997,
+        3654043998,
+        3654044010,
+        3654044011,
+        3654044009,
+        3654043993
+      ],
+      "tags": {
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 360846853,
+      "center": {
+        "lat": 11.7484959,
+        "lon": 79.7512284
+      },
+      "nodes": [
+        3654044083,
+        3654044091,
+        3654044092,
+        3654044084,
+        3654044083
+      ],
+      "tags": {
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 360860963,
+      "center": {
+        "lat": 11.7477924,
+        "lon": 79.7412956
+      },
+      "nodes": [
+        3654150759,
+        3654150754,
+        3654150973,
+        3654150986,
+        3654150972,
+        3654150931,
+        3654150823,
+        3654150759
+      ],
+      "tags": {
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 440856940,
+      "center": {
+        "lat": 11.7609234,
+        "lon": 79.7671043
+      },
+      "nodes": [
+        4386268267,
+        4386268268,
+        4386268269,
+        4386268272,
+        4386268271,
+        4386268270,
+        4386268267
+      ],
+      "tags": {
+        "amenity": "school",
+        "name": "St.Joseph's Higher Secondary School"
+      }
+    },
+    {
+      "type": "way",
+      "id": 440857951,
+      "center": {
+        "lat": 11.7592951,
+        "lon": 79.7670107
+      },
+      "nodes": [
+        4386278012,
+        4386278013,
+        4386278014,
+        4386278015,
+        4386278012
+      ],
+      "tags": {
+        "amenity": "school",
+        "name": "St.Joseph's Higher Secondary School"
+      }
+    },
+    {
+      "type": "way",
+      "id": 440859526,
+      "center": {
+        "lat": 11.7514472,
+        "lon": 79.7625886
+      },
+      "nodes": [
+        4386291970,
+        4386291971,
+        5225870993,
+        4386291972,
+        4386291973,
+        5225878680,
+        5225878679,
+        5225878681,
+        5225878678,
+        4386291974,
+        5225878677,
+        5225878676,
+        5225878675,
+        4386291975,
+        4386291976,
+        5225878674,
+        5225878673,
+        4386291977,
+        5225878672,
+        4386291978,
+        5225878671,
+        5225878670,
+        5225878669,
+        4386291970
+      ],
+      "tags": {
+        "amenity": "school",
+        "name": "St.Anne's Girls Higher Secondary School",
+        "school:gender": "female"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1148744316,
+      "center": {
+        "lat": 11.7589205,
+        "lon": 79.7755856
+      },
+      "nodes": [
+        10687634254,
+        10687634253,
+        10687634252,
+        10687634251,
+        5228369857,
+        10687634250,
+        10687634254
+      ],
+      "tags": {
+        "addr:city": "Cuddalore",
+        "addr:postcode": "607001",
+        "addr:street": "Gnana Prakasam Colony Road,Chitra Nagar",
+        "amenity": "school",
+        "name": "St.Joseph's Seminary"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1151386451,
+      "center": {
+        "lat": 11.717512,
+        "lon": 79.7741642
+      },
+      "nodes": [
+        10711395643,
+        10711395644,
+        10711395645,
+        10711395646,
+        10711395643
+      ],
+      "tags": {
+        "amenity": "school",
+        "name": "csi st.david matriculation school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1151437449,
+      "center": {
+        "lat": 11.7509097,
+        "lon": 79.7687418
+      },
+      "nodes": [
+        10711743284,
+        10711743285,
+        10711743286,
+        10711743287,
+        10711743284
+      ],
+      "tags": {
+        "amenity": "school",
+        "name": "ck school's ground",
+        "operator": "cavin care",
+        "operator:type": "private"
+      }
+    }
+  ]
+}

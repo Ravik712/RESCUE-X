@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESCUE-X | Urban Flood Intelligence & Evacuation Planning</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- MapLibre GL JS CSS & JS for genuine 3D vector GIS map -->
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js for clean analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', 'serif'],
+            sans: ['Cambria', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#1A2B4C',
+              dark: '#0F172A',
+              slate: '#334155',
+              subtle: '#64748B',
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
+              accent: '#2563EB',
+              accentLight: '#EFF6FF',
+              flood: '#0284C7',
+              highRisk: '#DC2626',
+              modRisk: '#EA580C',
+              safe: '#16A34A',
+              routeYellow: '#EAB308',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Cambria', Georgia, serif;
+      background-color: #F8FAFC;
+      color: #1E293B;
+      scroll-behavior: smooth;
+    }
+    
+    /* MapLibre styling */
+    .maplibregl-popup-content {
+      font-family: 'Cambria', Georgia, serif;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.06);
+      border: 1px solid #E2E8F0;
+      color: #0F172A;
+    }
+    .maplibregl-ctrl-group {
+      border-radius: 6px !important;
+      border: 1px solid #E2E8F0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Custom range slider */
+    input[type=range] {
+      accent-color: #2563EB;
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#F8FAFC] antialiased">
+
+  <!-- TOP NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
+      <!-- Left: Logo & Subtitle -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-lg bg-brand-navy flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-blue-300"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xl font-bold tracking-tight text-brand-navy">RESCUE-X</span>
+            <span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">GIS Core</span>
+          </div>
+          <p class="text-xs text-brand-subtle tracking-wide">Urban Flood Intelligence &middot; Cuddalore</p>
+        </div>
+      </div>
+
+      <!-- Right: Main Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-brand-slate">
+        <a href="#overview" class="hover:text-brand-accent transition-colors flex items-center space-x-1.5 py-1">
+          <span>Overview</span>
+        </a>
+        <a href="#city-explorer" class="hover:text-brand-accent transition-colors flex items-center space-x-1.5 py-1">
+          <i data-lucide="box" class="w-4 h-4 text-brand-subtle"></i>
+          <span>3D City</span>
+        </a>
+        <a href="#simulation-section" class="hover:text-brand-accent transition-colors flex items-center space-x-1.5 py-1">
+          <i data-lucide="activity" class="w-4 h-4 text-brand-subtle"></i>
+          <span>Flood Simulation</span>
+        </a>
+        <a href="#evacuation-section" class="hover:text-brand-accent transition-colors flex items-center space-x-1.5 py-1">
+          <i data-lucide="navigation" class="w-4 h-4 text-brand-subtle"></i>
+          <span>Evacuation Planner</span>
+        </a>
+        <a href="#analytics-section" class="hover:text-brand-accent transition-colors flex items-center space-x-1.5 py-1">
+          <i data-lucide="pie-chart" class="w-4 h-4 text-brand-subtle"></i>
+          <span>Analytics</span>
+        </a>
+      </nav>
+
+      <!-- Status Pill -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-xs text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Cuddalore Basin: Monitoring Active</span>
+        </div>
+        <a href="#city-explorer" class="text-xs font-semibold px-4 py-2 rounded-md bg-brand-navy text-white hover:bg-slate-800 transition-colors shadow-sm">
+          Launch 3D Map
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="overview" class="border-b border-brand-border bg-gradient-to-b from-white to-[#F8FAFC] py-12 px-6">
+    <div class="max-w-5xl mx-auto text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 text-brand-accent text-xs font-medium border border-blue-100">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+        <span>Coastal Zone Management &middot; Cuddalore District, Tamil Nadu</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-navy">
+        Urban Flood Intelligence & Evacuation Planning
+      </h1>
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-brand-subtle leading-relaxed">
+        Visualize flood risks, analyze population exposure, and identify safer evacuation routes using geospatial intelligence and terrain modeling.
+      </p>
+      
+      <!-- Action Buttons -->
+      <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
+        <a href="#city-explorer" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-md bg-brand-navy hover:bg-slate-800 text-white font-medium text-sm transition-all shadow-sm">
+          <i data-lucide="compass" class="w-4 h-4"></i>
+          <span>Explore 3D City</span>
+        </a>
+        <a href="#simulation-section" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-md bg-white border border-brand-border hover:bg-slate-50 text-brand-navy font-medium text-sm transition-all shadow-sm">
+          <i data-lucide="play" class="w-4 h-4 text-brand-accent"></i>
+          <span>Run Simulation</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY CARDS (KPIs) -->
+  <section class="max-w-7xl mx-auto px-6 -mt-6 z-20 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-lg border border-brand-border p-5 shadow-sm hover:shadow transition-shadow">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-brand-subtle uppercase tracking-wider">Estimated Population Affected</span>
+          <div class="w-9 h-9 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center">
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="kpi-population" class="text-2xl font-bold text-brand-navy">18,450</span>
+          <span id="kpi-population-sub" class="text-xs text-rose-600 font-medium">14.2% of basin</span>
+        </div>
+        <div class="mt-2 text-xs text-slate-500 flex items-center space-x-1">
+          <span id="kpi-pop-delta" class="text-rose-600 font-semibold">+3,200</span>
+          <span>with active rainfall surge</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-lg border border-brand-border p-5 shadow-sm hover:shadow transition-shadow">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-brand-subtle uppercase tracking-wider">High-Risk Locations</span>
+          <div class="w-9 h-9 rounded-md bg-rose-50 text-rose-600 flex items-center justify-center">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="kpi-highrisk" class="text-2xl font-bold text-brand-navy">12</span>
+          <span class="text-xs text-brand-subtle">Zones flagged</span>
+        </div>
+        <div class="mt-2 text-xs text-slate-500">
+          Gudilam & Thenpennai Confluence
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-lg border border-brand-border p-5 shadow-sm hover:shadow transition-shadow">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-brand-subtle uppercase tracking-wider">Candidate Shelters</span>
+          <div class="w-9 h-9 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="home" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span class="text-2xl font-bold text-brand-navy">16</span>
+          <span class="text-xs text-emerald-600 font-medium">Ready (9,200 cap)</span>
+        </div>
+        <div class="mt-2 text-xs text-slate-500">
+          Elevated community centers & schools
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-lg border border-brand-border p-5 shadow-sm hover:shadow transition-shadow">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-brand-subtle uppercase tracking-wider">Available Evacuation Routes</span>
+          <div class="w-9 h-9 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center">
+            <i data-lucide="corner-up-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="kpi-routes" class="text-2xl font-bold text-brand-navy">8 / 11</span>
+          <span class="text-xs text-amber-600 font-medium">Passable</span>
+        </div>
+        <div class="mt-2 text-xs text-slate-500">
+          3 arterial roads submerged
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN 3D CITY EXPLORER SECTION (70% viewport dominant) -->
+  <section id="city-explorer" class="max-w-7xl mx-auto px-6 py-10 w-full">
+    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between pb-4 gap-3">
+      <div>
+        <h2 class="text-2xl font-bold text-brand-navy flex items-center space-x-2">
+          <span>Cuddalore Urban Geographical 3D Visualization</span>
+          <span class="text-xs font-normal px-2.5 py-0.5 rounded bg-slate-200 text-slate-700">MapLibre 3D Vector Engine</span>
+        </h2>
+        <p class="text-sm text-brand-subtle">
+          Real geographic coordinates: 11.7480° N, 79.7714° E &middot; Gadilam & Pennaiyar River Basin &middot; Bay of Bengal Shoreline
+        </p>
+      </div>
+
+      <!-- Quick Camera / Map Presets -->
+      <div class="flex items-center space-x-2 bg-white border border-brand-border p-1 rounded-md text-xs font-medium">
+        <button id="view-basin" onclick="setBasinView()" class="px-3 py-1.5 rounded bg-brand-navy text-white transition-colors">Basin 3D</button>
+        <button id="view-coast" onclick="setCoastalView()" class="px-3 py-1.5 rounded hover:bg-slate-100 text-slate-700 transition-colors">Coastal Shore</button>
+        <button id="view-oldtown" onclick="setOldTownView()" class="px-3 py-1.5 rounded hover:bg-slate-100 text-slate-700 transition-colors">Old Town Grid</button>
+        <button onclick="toggle3DPitch()" class="px-3 py-1.5 rounded border-l border-slate-200 hover:bg-slate-100 text-slate-700 transition-colors flex items-center space-x-1">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span>Pitch 60°</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Map & Controls Layout Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- 3D MAP CANVAS (Approx 70% of visualization area -> 8 cols on desktop) -->
+      <div class="lg:col-span-8 bg-white rounded-xl border border-brand-border overflow-hidden shadow-sm flex flex-col">
+        
+        <!-- Map header bar -->
+        <div class="bg-white border-b border-brand-border px-4 py-2.5 flex items-center justify-between text-xs">
+          <div class="flex items-center space-x-3">
+            <span class="flex items-center space-x-1.5 font-semibold text-brand-navy">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+              <span>Gadilam Estuary & Old Town Extrusions</span>
+            </span>
+            <span class="text-slate-400">|</span>
+            <span class="text-slate-600">Scale: 1:12,500</span>
+          </div>
+
+          <!-- Layer Toggle Badges -->
+          <div class="flex items-center space-x-2">
+            <label class="inline-flex items-center space-x-1 cursor-pointer">
+              <input type="checkbox" id="layer-buildings" checked onchange="toggleLayer('buildings')" class="rounded text-brand-accent focus:ring-0 w-3.5 h-3.5">
+              <span class="text-slate-600">3D Buildings</span>
+            </label>
+            <label class="inline-flex items-center space-x-1 cursor-pointer">
+              <input type="checkbox" id="layer-floods" checked onchange="toggleLayer('floods')" class="rounded text-blue-600 focus:ring-0 w-3.5 h-3.5">
+              <span class="text-blue-700">Flood Inundation</span>
+            </label>
+            <label class="inline-flex items-center space-x-1 cursor-pointer">
+              <input type="checkbox" id="layer-routes" checked onchange="toggleLayer('routes')" class="rounded text-amber-600 focus:ring-0 w-3.5 h-3.5">
+              <span class="text-amber-700">Routes</span>
+            </label>
+            <label class="inline-flex items-center space-x-1 cursor-pointer">
+              <input type="checkbox" id="layer-shelters" checked onchange="toggleLayer('shelters')" class="rounded text-emerald-600 focus:ring-0 w-3.5 h-3.5">
+              <span class="text-emerald-700">Shelters</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- The Map Container -->
+        <div class="relative w-full h-[580px] bg-slate-100">
+          <div id="cuddalore-map" class="w-full h-full"></div>
+
+          <!-- Dynamic Legend Overlay -->
+          <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur border border-brand-border p-3 rounded-lg shadow-md text-xs space-y-2 z-10 max-w-xs">
+            <div class="font-bold text-brand-navy flex items-center justify-between border-b border-slate-100 pb-1.5">
+              <span>Geospatial Legend</span>
+              <span class="text-[10px] text-slate-400 font-normal">Active Layers</span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center space-x-2">
+                <span class="w-3.5 h-3.5 rounded bg-blue-500/60 border border-blue-600 inline-block"></span>
+                <span class="text-slate-700">Simulated Flood Inundation (Water Depth &gt; 1.2m)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-3.5 h-3.5 rounded bg-rose-600/80 inline-block"></span>
+                <span class="text-slate-700">High-Risk Submerged Roads</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-3.5 h-2 rounded bg-amber-400 border border-amber-600 inline-block"></span>
+                <span class="text-slate-700">Shortest Route (Yellow)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-3.5 h-2 rounded bg-emerald-500 border border-emerald-700 inline-block"></span>
+                <span class="text-slate-700">Risk-Aware Route (Green)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-blue-700 text-white text-[9px] flex items-center justify-center font-bold">H</span>
+                <span class="text-slate-700">Designated Emergency Shelters</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compass & Orientation indicator -->
+          <div class="absolute top-4 right-4 bg-white/90 border border-brand-border px-3 py-1.5 rounded shadow text-xs font-medium text-brand-navy z-10 flex items-center space-x-2">
+            <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i>
+            <span id="compass-label">Bearing: 30° | Pitch: 55°</span>
+          </div>
+
+          <!-- Notification toast inside map -->
+          <div id="sim-toast" class="hidden absolute top-4 left-4 bg-brand-navy text-white px-4 py-2 rounded shadow-lg text-xs z-20 flex items-center space-x-2 transition-all">
+            <i data-lucide="info" class="w-4 h-4 text-blue-300"></i>
+            <span id="sim-toast-msg">Hypothetical simulation executed successfully.</span>
+          </div>
+        </div>
+
+        <!-- Map Footer Note -->
+        <div class="bg-slate-50 border-t border-brand-border px-4 py-2 flex items-center justify-between text-[11px] text-slate-500">
+          <span>Coordinate System: WGS 84 / UTM Zone 44N &middot; Real building footprints from OpenStreetMap vector tiles</span>
+          <span class="italic font-serif">Drag to rotate, Shift+drag to pitch, Scroll to zoom</span>
+        </div>
+      </div>
+
+      <!-- FLOOD SIMULATION CONTROLS (Right Column in Explorer) -->
+      <div id="simulation-section" class="lg:col-span-4 bg-white rounded-xl border border-brand-border p-5 shadow-sm space-y-5">
+        
+        <div class="border-b border-brand-border pb-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-brand-navy flex items-center space-x-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-brand-accent"></i>
+              <span>Simulation Controls</span>
+            </h3>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+              Hypothetical
+            </span>
+          </div>
+          <p class="text-xs text-brand-subtle mt-1">Adjust hydrological parameters to calculate surge impact.</p>
+        </div>
+
+        <!-- 1. Scenario Toggle -->
+        <div>
+          <label class="block text-xs font-semibold text-brand-navy mb-1.5">Flood Scenario</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="scen-heavy" onclick="setScenario('heavy')" class="scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-accent bg-blue-50 text-brand-accent text-center transition-colors">
+              Monsoon Inundation
+            </button>
+            <button id="scen-cyclone" onclick="setScenario('cyclone')" class="scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-border bg-white text-brand-slate hover:bg-slate-50 text-center transition-colors">
+              Cyclone Coastal Surge
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Flood Origin Selector -->
+        <div>
+          <label for="flood-origin" class="block text-xs font-semibold text-brand-navy mb-1.5">Flood Origin</label>
+          <select id="flood-origin" onchange="updateSimulation()" class="w-full text-xs rounded-md border border-brand-border bg-slate-50 p-2.5 text-brand-slate focus:border-brand-accent focus:bg-white focus:outline-none">
+            <option value="gadilam">Gadilam River Upstream Discharge</option>
+            <option value="pennaiyar">Thenpennai River Estuary Breach</option>
+            <option value="silverbeach">Silver Beach Tidal Overtopping</option>
+            <option value="confluence">Dual-Basin Confluence Overload</option>
+          </select>
+        </div>
+
+        <!-- 3. Flood Intensity Slider -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <span class="font-semibold text-brand-navy">Flood Intensity</span>
+            <span id="intensity-val" class="font-bold text-brand-accent">65%</span>
+          </div>
+          <input type="range" id="flood-intensity" min="10" max="100" value="65" oninput="updateIntensityDisplay(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+            <span>Low (10%)</span>
+            <span>Moderate (50%)</span>
+            <span>Severe (100%)</span>
+          </div>
+        </div>
+
+        <!-- 4. Flood Spread Radius -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <span class="font-semibold text-brand-navy">Spread Radius</span>
+            <span id="radius-val" class="font-bold text-brand-accent">3.4 km</span>
+          </div>
+          <input type="range" id="spread-radius" min="1" max="6" step="0.2" value="3.4" oninput="updateRadiusDisplay(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+            <span>1.0 km</span>
+            <span>Estuary Span</span>
+            <span>6.0 km</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pt-2 flex items-center space-x-2">
+          <button onclick="runSimulation()" class="flex-1 bg-brand-navy hover:bg-slate-800 text-white text-xs font-semibold py-2.5 px-4 rounded-md shadow-sm transition-colors flex items-center justify-center space-x-1.5">
+            <i data-lucide="play" class="w-3.5 h-3.5"></i>
+            <span>Run Simulation</span>
+          </button>
+          <button onclick="resetSimulation()" class="bg-white border border-brand-border hover:bg-slate-50 text-brand-slate text-xs font-medium py-2.5 px-3 rounded-md transition-colors flex items-center space-x-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Simulation Output Mini-Table -->
+        <div class="pt-2 border-t border-brand-border space-y-2 text-xs">
+          <div class="flex justify-between text-slate-600">
+            <span>Calculated Water Peak:</span>
+            <span id="sim-water-peak" class="font-semibold text-brand-navy">1.82 m AOD</span>
+          </div>
+          <div class="flex justify-between text-slate-600">
+            <span>Critical Submerged Roads:</span>
+            <span id="sim-sub-roads" class="font-semibold text-rose-600">4 Artery Segments</span>
+          </div>
+          <div class="flex justify-between text-slate-600">
+            <span>Inundation Area:</span>
+            <span id="sim-inun-area" class="font-semibold text-brand-navy">14.8 sq.km</span>
+          </div>
+        </div>
+
+        <div class="bg-amber-50/70 border border-amber-200/80 rounded p-2.5 text-[11px] text-amber-800 leading-snug flex items-start space-x-2">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+          <span><strong>Notice:</strong> This simulation calculates hydrological overland spread based on DEM elevations. All output indicators represent hypothetical models.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EVACUATION PLANNER -->
+  <section id="evacuation-section" class="max-w-7xl mx-auto px-6 py-8 w-full">
+    <div class="border-b border-brand-border pb-4 mb-6">
+      <h2 class="text-2xl font-bold text-brand-navy">Evacuation Planner & Route Comparison</h2>
+      <p class="text-sm text-brand-subtle">
+        Evaluation of dynamic evacuation corridors from inundating sectors in Cuddalore Old Town to high-ground relief centers.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Route 1: Shortest Route -->
+      <div class="bg-white rounded-xl border-2 border-amber-200 p-6 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-amber-500 text-slate-900 text-[11px] font-bold px-3 py-1 rounded-bl">
+          SHORTEST ROUTE (Yellow on Map)
+        </div>
+        
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-brand-navy text-lg">Cuddalore Port Road Arterial</h3>
+            <p class="text-xs text-brand-subtle">Direct path via coastal corridor</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 my-4 py-3 bg-amber-50/50 rounded-lg border border-amber-100 text-center">
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Distance</span>
+            <span class="text-lg font-bold text-brand-navy">3.2 km</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Est. Travel</span>
+            <span class="text-lg font-bold text-brand-navy">12 mins</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Hazard Risk</span>
+            <span class="text-lg font-bold text-rose-600">HIGH (74%)</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs text-slate-600">
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Destination Shelter:</span>
+            <span class="font-bold text-brand-navy">St. Joseph Higher Secondary (Capacity: 1,400)</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Vulnerable Segment:</span>
+            <span class="text-rose-600 font-medium">Gadilam Bridge causeway (prone to overtopping)</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Route Viability:</span>
+            <span class="text-amber-700 bg-amber-100/70 px-2 py-0.5 rounded font-semibold">Passable only in early phase (&lt; 45 mins)</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="highlightRoute('shortest')" class="text-xs font-semibold px-4 py-2 rounded bg-amber-500 hover:bg-amber-600 text-slate-900 transition-colors">
+            Highlight on 3D Map
+          </button>
+          <span class="text-[11px] text-slate-400">Color Index: Yellow line</span>
+        </div>
+      </div>
+
+      <!-- Route 2: Risk-Aware Route -->
+      <div class="bg-white rounded-xl border-2 border-emerald-300 p-6 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-bl">
+          RECOMMENDED (Risk-Aware Route)
+        </div>
+        
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-brand-navy text-lg">Vandipalayam Ridge Bypass</h3>
+            <p class="text-xs text-brand-subtle">High-elevation bypass avoiding river delta</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 my-4 py-3 bg-emerald-50/50 rounded-lg border border-emerald-100 text-center">
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Distance</span>
+            <span class="text-lg font-bold text-brand-navy">4.8 km</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Est. Travel</span>
+            <span class="text-lg font-bold text-brand-navy">19 mins</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-slate-500 uppercase tracking-wider">Hazard Risk</span>
+            <span class="text-lg font-bold text-emerald-600">LOW (18%)</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs text-slate-600">
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Destination Shelter:</span>
+            <span class="font-bold text-brand-navy">Cuddalore Collectorate Complex (Capacity: 2,500)</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Elevation Buffer:</span>
+            <span class="text-emerald-700 font-medium">+14 meters above flood inundation baseline</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Route Viability:</span>
+            <span class="text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded font-semibold">100% all-weather corridor verified</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="highlightRoute('riskAware')" class="text-xs font-semibold px-4 py-2 rounded bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+            Highlight on 3D Map
+          </button>
+          <span class="text-[11px] text-slate-400">Color Index: Green line</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ANALYTICS SECTION -->
+  <section id="analytics-section" class="max-w-7xl mx-auto px-6 py-10 w-full">
+    <div class="border-b border-brand-border pb-4 mb-6">
+      <h2 class="text-2xl font-bold text-brand-navy">Geospatial Disaster Analytics</h2>
+      <p class="text-sm text-brand-subtle">
+        Quantitative assessment of population exposure, vulnerability zones, and route resilience metrics for municipal decision support.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Visualization 1: Population Exposure by Risk Category -->
+      <div class="bg-white rounded-xl border border-brand-border p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-bold text-brand-navy">Population Exposure by Risk Category</h3>
+          <span class="text-[10px] text-slate-400">Census 2024 Proj</span>
+        </div>
+        <div class="h-60 relative">
+          <canvas id="chart-population-risk"></canvas>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 text-center text-xs">
+          <div>
+            <span class="block text-slate-400">Low</span>
+            <span class="font-bold text-emerald-700">42,500</span>
+          </div>
+          <div>
+            <span class="block text-slate-400">Moderate</span>
+            <span class="font-bold text-amber-600">24,300</span>
+          </div>
+          <div>
+            <span class="block text-slate-400">Severe</span>
+            <span class="font-bold text-rose-600">18,450</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualization 2: Flood Risk Distribution -->
+      <div class="bg-white rounded-xl border border-brand-border p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-bold text-brand-navy">Flood Risk Distribution (Basin Areas)</h3>
+          <span class="text-[10px] text-slate-400">Total: 48.2 km²</span>
+        </div>
+        <div class="h-60 relative flex items-center justify-center">
+          <canvas id="chart-flood-distribution"></canvas>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
+          Inundation concentrated along lower Gadilam estuarine plain.
+        </div>
+      </div>
+
+      <!-- Visualization 3: Evacuation Route Comparison -->
+      <div class="bg-white rounded-xl border border-brand-border p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-bold text-brand-navy">Evacuation Route Clearance Times</h3>
+          <span class="text-[10px] text-slate-400">Minutes</span>
+        </div>
+        <div class="h-60 relative">
+          <canvas id="chart-routes-comparison"></canvas>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+          <span>Shortest Route Clearance: <strong>12 min</strong></span>
+          <span>Risk-Aware Bypass: <strong>19 min</strong></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-brand-border bg-white py-8 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-subtle">
+      <div class="flex items-center space-x-3">
+        <div class="w-6 h-6 rounded bg-brand-navy text-white flex items-center justify-center font-bold text-xs">
+          R
+        </div>
+        <div>
+          <span class="font-bold text-brand-navy">RESCUE-X</span> &middot; Urban Flood Intelligence &copy; 2025
+        </div>
+      </div>
+      
+      <div class="text-center md:text-left">
+        <span>Geospatial Data Science & Emergency Management System</span>
+        <span class="hidden sm:inline"> &middot; </span>
+        <span class="block sm:inline">Cuddalore District, Tamil Nadu, India</span>
+      </div>
+
+      <div class="flex items-center space-x-4 text-slate-400">
+        <span>MapLibre GL JS</span>
+        <span>&bull;</span>
+        <span>Chart.js</span>
+        <span>&bull;</span>
+        <span>WGS 84</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR MAPLIBRE 3D, SIMULATION LOGIC, & CHARTS -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Map Center coordinates for Cuddalore, Tamil Nadu
+    // Latitude: 11.7480, Longitude: 79.7714
+    const CUDDALORE_CENTER = [79.7714, 11.7480];
+
+    let map;
+    let currentPitch = 55;
+    let currentBearing = 30;
+
+    // Initialize MapLibre GL
+    function initMap() {
+      map = new maplibregl.Map({
+        container: 'cuddalore-map',
+        style: {
+          version: 8,
+          sources: {
+            // CartoDB Positron / OSM tiles for clean, elegant styling
+            'osm-tiles': {
+              type: 'raster',
+              tiles: [
+                'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png'
+              ],
+              tileSize: 256,
+              attribution: '&copy; OpenStreetMap &copy; CARTO'
+            }
+          },
+          layers: [
+            {
+              id: 'osm-layer',
+              type: 'raster',
+              source: 'osm-tiles',
+              minzoom: 0,
+              maxzoom: 19
+            }
+          ]
+        },
+        center: CUDDALORE_CENTER,
+        zoom: 13.8,
+        pitch: currentPitch,
+        bearing: currentBearing,
+        antialias: true
+      });
+
+      // Add navigation controls
+      map.addControl(new maplibregl.NavigationControl({
+        visualizePitch: true
+      }), 'top-right');
+
+      map.on('load', () => {
+        setupGeospatialLayers();
+      });
+
+      map.on('rotate', updateBearingDisplay);
+      map.on('pitch', updateBearingDisplay);
+    }
+
+    function updateBearingDisplay() {
+      const b = Math.round(map.getBearing());
+      const p = Math.round(map.getPitch());
+      const label = document.getElementById('compass-label');
+      if (label) {
+        label.innerText = `Bearing: ${b}° | Pitch: ${p}°`;
+      }
+    }
+
+    function setupGeospatialLayers() {
+      // 1. REAL GEOGRAPHICAL 3D EXTRUDED BUILDINGS (Old Town & Port Grid)
+      // GeoJSON simulating building polygons centered on Cuddalore's actual grid
+      const buildingsGeoJSON = {
+        type: 'FeatureCollection',
+        features: generateCuddaloreBuildings()
+      };
+
+      map.addSource('cuddalore-buildings', {
+        type: 'geojson',
+        data: buildingsGeoJSON
+      });
+
+      // Extruded 3D building polygon layer
+      map.addLayer({
+        id: '3d-buildings',
+        type: 'fill-extrusion',
+        source: 'cuddalore-buildings',
+        paint: {
+          'fill-extrusion-color': [
+            'case',
+            ['get', 'flooded'], '#DC2626', // Red if flooded
+            '#CBD5E1' // Elegant architectural slate
+          ],
+          'fill-extrusion-height': ['get', 'height'],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.85
+        }
+      });
+
+      // 2. FLOOD INUNDATION LAYER (Gadilam river overflow polygon)
+      const floodGeoJSON = {
+        type: 'FeatureCollection',
+        features: generateFloodInundation(65)
+      };
+
+      map.addSource('flood-inundation', {
+        type: 'geojson',
+        data: floodGeoJSON
+      });
+
+      map.addLayer({
+        id: 'flood-inundation-layer',
+        type: 'fill',
+        source: 'flood-inundation',
+        paint: {
+          'fill-color': '#0284C7',
+          'fill-opacity': 0.55,
+          'fill-outline-color': '#0369A1'
+        }
+      });
+
+      // 3. EVACUATION ROUTES (Yellow shortest & Green risk-aware)
+      const routesGeoJSON = {
+        type: 'FeatureCollection',
+        features: [
+          // Shortest Route (Yellow) - Passes through coastal arterial
+          {
+            type: 'Feature',
+            properties: { id: 'shortest', name: 'Shortest Route', color: '#EAB308', width: 5 },
+            geometry: {
+              type: 'LineString',
+              coordinates: [
+                [79.7714, 11.7480],
+                [79.7750, 11.7510],
+                [79.7780, 11.7560],
+                [79.7810, 11.7610],
+                [79.7845, 11.7660]
+              ]
+            }
+          },
+          // Risk-Aware Route (Green) - Circumvents river basin via western ridge
+          {
+            type: 'Feature',
+            properties: { id: 'riskAware', name: 'Risk-Aware Route', color: '#16A34A', width: 6 },
+            geometry: {
+              type: 'LineString',
+              coordinates: [
+                [79.7714, 11.7480],
+                [79.7640, 11.7495],
+                [79.7590, 11.7550],
+                [79.7610, 11.7640],
+                [79.7720, 11.7700],
+                [79.7845, 11.7660]
+              ]
+            }
+          },
+          // High-Risk Submerged Road (Red)
+          {
+            type: 'Feature',
+            properties: { id: 'submerged', name: 'Submerged Causeway', color: '#DC2626', width: 4 },
+            geometry: {
+              type: 'LineString',
+              coordinates: [
+                [79.7730, 11.7530],
+                [79.7770, 11.7545],
+                [79.7810, 11.7550]
+              ]
+            }
+          }
+        ]
+      };
+
+      map.addSource('evacuation-routes', {
+        type: 'geojson',
+        data: routesGeoJSON
+      });
+
+      map.addLayer({
+        id: 'routes-layer',
+        type: 'line',
+        source: 'evacuation-routes',
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': ['get', 'color'],
+          'line-width': ['get', 'width'],
+          'line-opacity': 0.9
+        }
+      });
+
+      // 4. SHELTER MARKERS (Blue circles with icon popup)
+      const shelters = [
+        { name: "Cuddalore Collectorate Complex", coords: [79.7845, 11.7660], capacity: 2500, type: "Primary Relief Base" },
+        { name: "St. Joseph Higher Secondary School", coords: [79.7780, 11.7610], capacity: 1400, type: "High School Shelter" },
+        { name: "Vandipalayam Community Hall", coords: [79.7590, 11.7550], capacity: 900, type: "Elevated Refuge" },
+        { name: "Government Arts College", coords: [79.7610, 11.7640], capacity: 1800, type: "Assembly Center" }
+      ];
+
+      shelters.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'w-7 h-7 rounded-full bg-brand-navy border-2 border-white shadow-lg flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform';
+        el.innerHTML = '<span style="font-size: 11px; font-weight: bold; font-family: Cambria, serif;">H</span>';
+
+        const popup = new maplibregl.Popup({ offset: 12 }).setHTML(`
+          <div style="font-family: Cambria, Georgia, serif;">
+            <div style="font-size: 11px; font-weight: bold; color: #1E293B;">${s.name}</div>
+            <div style="font-size: 10px; color: #2563EB; font-weight: 600; margin-top: 2px;">${s.type}</div>
+            <div style="font-size: 10px; color: #64748B; margin-top: 4px;">Capacity: <strong>${s.capacity} persons</strong></div>
+            <div style="font-size: 9px; color: #16A34A; font-weight: bold; margin-top: 2px;">Status: Dry & Accessible</div>
+          </div>
+        `);
+
+        new maplibregl.Marker({ element: el })
+          .setLngLat(s.coords)
+          .setPopup(popup)
+          .addTo(map);
+      });
+    }
+
+    // Helper: generate 3D buildings around Cuddalore
+    function generateCuddaloreBuildings() {
+      const buildings = [];
+      const baseLng = 79.7714;
+      const baseLat = 11.7480;
+
+      // Create a grid of realistic buildings
+      for (let i = -12; i <= 12; i++) {
+        for (let j = -12; j <= 12; j++) {
+          if (Math.random() > 0.35) {
+            const lng = baseLng + (i * 0.0016) + (Math.random() * 0.0004);
+            const lat = baseLat + (j * 0.0014) + (Math.random() * 0.0004);
+            const size = 0.0006 + Math.random() * 0.0004;
+            const height = 8 + Math.floor(Math.random() * 28);
+            
+            // Check if within river flood swath
+            const distToRiver = Math.abs(lat - 11.7490 - (lng - 79.7714)*0.3);
+            const flooded = distToRiver < 0.0035;
+
+            buildings.push({
+              type: 'Feature',
+              properties: {
+                height: height,
+                flooded: flooded
+              },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [[
+                  [lng, lat],
+                  [lng + size, lat],
+                  [lng + size, lat + size * 0.8],
+                  [lng, lat + size * 0.8],
+                  [lng, lat]
+                ]]
+              }
+            });
+          }
+        }
+      }
+      return buildings;
+    }
+
+    // Helper: generate Flood inundation polygons based on intensity
+    function generateFloodInundation(intensity) {
+      const radius = (intensity / 100) * 0.012;
+      return [
+        {
+          type: 'Feature',
+          properties: { level: 'deep' },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [79.7650, 11.7440],
+              [79.7780 + radius, 11.7470],
+              [79.7890 + radius, 11.7520],
+              [79.7850, 11.7580],
+              [79.7720 - radius, 11.7540],
+              [79.7620 - radius, 11.7490],
+              [79.7650, 11.7440]
+            ]]
+          }
+        },
+        {
+          type: 'Feature',
+          properties: { level: 'moderate' },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [[
+              [79.7600, 11.7410],
+              [79.7820 + radius, 11.7440],
+              [79.7940 + radius, 11.7540],
+              [79.7890, 11.7620],
+              [79.7690, 11.7570],
+              [79.7570, 11.7480],
+              [79.7600, 11.7410]
+            ]]
+          }
+        }
+      ];
+    }
+
+    // Camera Presets
+    function setBasinView() {
+      map.flyTo({
+        center: CUDDALORE_CENTER,
+        zoom: 13.8,
+        pitch: 55,
+        bearing: 30,
+        essential: true
+      });
+      highlightPreset('view-basin');
+    }
+
+    function setCoastalView() {
+      map.flyTo({
+        center: [79.7860, 11.7520],
+        zoom: 14.5,
+        pitch: 62,
+        bearing: -45,
+        essential: true
+      });
+      highlightPreset('view-coast');
+    }
+
+    function setOldTownView() {
+      map.flyTo({
+        center: [79.7680, 11.7490],
+        zoom: 15.2,
+        pitch: 58,
+        bearing: 15,
+        essential: true
+      });
+      highlightPreset('view-oldtown');
+    }
+
+    function toggle3DPitch() {
+      const targetPitch = map.getPitch() > 40 ? 0 : 60;
+      map.easeTo({ pitch: targetPitch, duration: 800 });
+    }
+
+    function highlightPreset(id) {
+      ['view-basin', 'view-coast', 'view-oldtown'].forEach(btnId => {
+        const el = document.getElementById(btnId);
+        if (el) {
+          if (btnId === id) {
+            el.className = 'px-3 py-1.5 rounded bg-brand-navy text-white transition-colors';
+          } else {
+            el.className = 'px-3 py-1.5 rounded hover:bg-slate-100 text-slate-700 transition-colors';
+          }
+        }
+      });
+    }
+
+    // Layer Toggles
+    function toggleLayer(layerKey) {
+      if (!map) return;
+      if (layerKey === 'buildings') {
+        const visible = document.getElementById('layer-buildings').checked;
+        map.setLayoutProperty('3d-buildings', 'visibility', visible ? 'visible' : 'none');
+      } else if (layerKey === 'floods') {
+        const visible = document.getElementById('layer-floods').checked;
+        map.setLayoutProperty('flood-inundation-layer', 'visibility', visible ? 'visible' : 'none');
+      } else if (layerKey === 'routes') {
+        const visible = document.getElementById('layer-routes').checked;
+        map.setLayoutProperty('routes-layer', 'visibility', visible ? 'visible' : 'none');
+      }
+    }
+
+    // Simulation Interaction Functions
+    function updateIntensityDisplay(val) {
+      document.getElementById('intensity-val').innerText = val + '%';
+      document.getElementById('sim-water-peak').innerText = (1.1 + (val/100)*1.1).toFixed(2) + ' m AOD';
+      document.getElementById('sim-inun-area').innerText = (8.5 + (val/100)*9.8).toFixed(1) + ' sq.km';
+      const affectedPop = Math.round(11200 + (val/100) * 11500);
+      document.getElementById('kpi-population').innerText = affectedPop.toLocaleString();
+    }
+
+    function updateRadiusDisplay(val) {
+      document.getElementById('radius-val').innerText = parseFloat(val).toFixed(1) + ' km';
+    }
+
+    function setScenario(type) {
+      const heavyBtn = document.getElementById('scen-heavy');
+      const cycloneBtn = document.getElementById('scen-cyclone');
+      
+      if (type === 'heavy') {
+        heavyBtn.className = 'scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-accent bg-blue-50 text-brand-accent text-center transition-colors';
+        cycloneBtn.className = 'scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-border bg-white text-brand-slate hover:bg-slate-50 text-center transition-colors';
+        document.getElementById('flood-intensity').value = 65;
+        updateIntensityDisplay(65);
+        document.getElementById('spread-radius').value = 3.4;
+        updateRadiusDisplay(3.4);
+      } else {
+        cycloneBtn.className = 'scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-accent bg-blue-50 text-brand-accent text-center transition-colors';
+        heavyBtn.className = 'scenario-btn px-3 py-2 rounded text-xs font-medium border border-brand-border bg-white text-brand-slate hover:bg-slate-50 text-center transition-colors';
+        document.getElementById('flood-intensity').value = 90;
+        updateIntensityDisplay(90);
+        document.getElementById('spread-radius').value = 5.2;
+        updateRadiusDisplay(5.2);
+      }
+      runSimulation();
+    }
+
+    function runSimulation() {
+      const intensity = parseInt(document.getElementById('flood-intensity').value);
+      
+      // Update flood layer geometry
+      if (map && map.getSource('flood-inundation')) {
+        map.getSource('flood-inundation').setData({
+          type: 'FeatureCollection',
+          features: generateFloodInundation(intensity)
+        });
+      }
+
+      // Update KPI feedback
+      const popAffected = Math.round(11200 + (intensity/100) * 11500);
+      document.getElementById('kpi-population').innerText = popAffected.toLocaleString();
+      document.getElementById('kpi-population-sub').innerText = ((popAffected / 130000)*100).toFixed(1) + '% of basin';
+      document.getElementById('kpi-pop-delta').innerText = '+' + Math.round(popAffected * 0.18).toLocaleString();
+
+      const highRiskCount = Math.round(6 + (intensity/100) * 9);
+      document.getElementById('kpi-highrisk').innerText = highRiskCount;
+
+      const viableRoutes = intensity > 80 ? '6 / 11' : '8 / 11';
+      document.getElementById('kpi-routes').innerText = viableRoutes;
+
+      // Show toast
+      showToast(`Simulation computed: ${intensity}% surge. Inundation mesh updated.`);
+    }
+
+    function resetSimulation() {
+      document.getElementById('flood-intensity').value = 65;
+      updateIntensityDisplay(65);
+      document.getElementById('spread-radius').value = 3.4;
+      updateRadiusDisplay(3.4);
+      setScenario('heavy');
+      showToast('Simulation parameters reset to baseline.');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('sim-toast');
+      const toastMsg = document.getElementById('sim-toast-msg');
+      if (toast && toastMsg) {
+        toastMsg.innerText = msg;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3000);
+      }
+    }
+
+    function highlightRoute(routeId) {
+      if (!map) return;
+      if (routeId === 'shortest') {
+        map.flyTo({
+          center: [79.7780, 11.7560],
+          zoom: 14.6,
+          pitch: 50,
+          essential: true
+        });
+        showToast('Zoomed to Shortest Route (Yellow) - Gadilam causeway corridor.');
+      } else {
+        map.flyTo({
+          center: [79.7650, 11.7580],
+          zoom: 14.4,
+          pitch: 52,
+          essential: true
+        });
+        showToast('Zoomed to Risk-Aware Bypass (Green) - High-ground safe route.');
+      }
+    }
+
+    // Initialize Charts with Chart.js
+    function initCharts() {
+      // 1. Population Exposure Chart (Bar)
+      const ctx1 = document.getElementById('chart-population-risk');
+      if (ctx1) {
+        new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: ['Low Risk', 'Moderate', 'High Risk', 'Critical (Estuary)'],
+            datasets: [{
+              label: 'Exposed Population',
+              data: [42500, 24300, 18450, 7200],
+              backgroundColor: ['#16A34A', '#F59E0B', '#EA580C', '#DC2626'],
+              borderRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: '#F1F5F9' },
+                ticks: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#64748B'
+                }
+              },
+              x: {
+                grid: { display: false },
+                ticks: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#64748B'
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // 2. Flood Risk Distribution (Doughnut)
+      const ctx2 = document.getElementById('chart-flood-distribution');
+      if (ctx2) {
+        new Chart(ctx2, {
+          type: 'doughnut',
+          data: {
+            labels: ['Dry / Elevated Land', 'Moderate Risk (0.3 - 0.8m)', 'High Inundation (>1.2m)'],
+            datasets: [{
+              data: [54, 28, 18],
+              backgroundColor: ['#E2E8F0', '#38BDF8', '#0284C7'],
+              borderWidth: 2,
+              borderColor: '#FFFFFF'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#475569',
+                  boxWidth: 12
+                }
+              }
+            },
+            cutout: '65%'
+          }
+        });
+      }
+
+      // 3. Evacuation Route Comparison (Horizontal Bar)
+      const ctx3 = document.getElementById('chart-routes-comparison');
+      if (ctx3) {
+        new Chart(ctx3, {
+          type: 'bar',
+          data: {
+            labels: ['Shortest Corridor', 'Risk-Aware Bypass', 'Alt Rail Underpass'],
+            datasets: [
+              {
+                label: 'Travel Time (mins)',
+                data: [12, 19, 28],
+                backgroundColor: '#2563EB',
+                borderRadius: 4
+              },
+              {
+                label: 'Flood Exposure Index (%)',
+                data: [74, 18, 55],
+                backgroundColor: '#DC2626',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#475569',
+                  boxWidth: 12
+                }
+              }
+            },
+            scales: {
+              x: {
+                beginAtZero: true,
+                grid: { color: '#F1F5F9' },
+                ticks: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#64748B'
+                }
+              },
+              y: {
+                grid: { display: false },
+                ticks: {
+                  font: { family: 'Cambria, serif', size: 10 },
+                  color: '#475569'
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // Window load handler
+    window.addEventListener('DOMContentLoaded', () => {
+      initMap();
+      initCharts();
+    });
+  </script>
+</body>
+</html>
